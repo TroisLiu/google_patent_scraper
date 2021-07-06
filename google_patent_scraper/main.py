@@ -276,10 +276,10 @@ class scraper_class:
         cpc_level1=[]
         cpc_level2=[]
         cpc_level3=[]
-        cpc_levle4=[]
+        cpc_level4=[]
         cpc_data = soup.find_all('span', itemprop="Code")
         # Get text 
-        if cpc_list:
+        if cpc_data:
            for cpc_item in cpc_data:
                cpc_code = cpc_item.contents[0]
                if len(cpc_code) == 1 and cpc_code not in cpc_level1:

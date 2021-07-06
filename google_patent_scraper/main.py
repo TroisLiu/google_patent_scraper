@@ -288,8 +288,10 @@ class scraper_class:
                    cpc_level2.append(cpc_code)
                elif len(cpc_code) == 4 and cpc_code not in cpc_level3:
                    cpc_level3.append(cpc_code)
-               else:
+               elif len(cpc_code) > 4 and cpc_code not in cpc_level4:
                    cpc_level4.append(cpc_code)
+               else:
+                   pass
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
         #  Return data as a dictionary

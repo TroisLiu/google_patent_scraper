@@ -269,6 +269,27 @@ class scraper_class:
             # Get text 
             if abstract:
                 abstract_text=abstract['content']
+               
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+        #  Get cpc category
+        # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+        cpc_level1=[]
+        cpc_level2=[]
+        cpc_level3=[]
+        cpc_levle4=[]
+        cpc_data = soup.find_all('span', itemprop="Code")
+        # Get text 
+        if cpc_list:
+           for cpc_item in cpc_data:
+               cpc_code = cpc_item.contents[0]
+               if len(cpc_code) == 1 and cpc_code not in cpc_level1:
+                   cpc_level1.append(cpc_code)
+               elif len(cpc_code) == 3 and cpc_code not in cpc_level2:
+                   cpc_level2.append(cpc_code)
+               elif len(cpc_code) == 4 and cpc_code not in cpc_level3:
+                   cpc_level3.append(cpc_code)
+               else:
+                   cpc_level4.append(cpc_code)
 
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
         #  Return data as a dictionary
@@ -284,7 +305,11 @@ class scraper_class:
                 'forward_cite_yes_family':json.dumps(forward_cites_yes_family),
                 'backward_cite_no_family':json.dumps(backward_cites_no_family),
                 'backward_cite_yes_family':json.dumps(backward_cites_yes_family),
-                'abstract_text':abstract_text})
+                'abstract_text':abstract_text,
+                'cpc_level1':json.dumps(cpc_level1),
+                'cpc_level2':json.dumps(cpc_level2),
+                'cpc_level3':json.dumps(cpc_level3),
+                'cpc_level4':json.dumps(cpc_level4)})
 
     def get_scraped_data(self,soup,patent,url):
         # ~~ Parse individual patent ~~ #

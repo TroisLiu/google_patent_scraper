@@ -1,5 +1,7 @@
 # Patent Scraper
-A python package to scrape patents from 'https://patents.google.com/'. The package is made up of a single python class, scraper_class. This scraper can be used both to retreive parsed html of a single patents page or a list of patents.
+A python package to scrape patents from 'https://patents.google.com/'. The package is made up of a single python class, scraper_class. This scraper can be used both to retreive parsed html of a single patents page or a list of patents.  
+
+(* is added on July. 2021)
 
 The following elements are always returned by the scraper class:
 
@@ -15,10 +17,10 @@ The following elements are always returned by the scraper class:
     forward_cites_yes_family  (json)  : forward citations that are family-to-family cites
     backward_cites_no_family  (json)  : backward citations that are not family-to-family cites
     backward_cites_yes_family (json)  : backward citations that are family-to-family cites
-    cpc_level1                (json)  : cpc 1-tier id (e.g. A, B, ...,H), same as cpc_section_id in api/query of PatentViews
-    cpc_level2                (json)  : cpc 2-tier id (e.g. A01, B01, ...,H99)
-    cpc_level3                (json)  : cpc 3-tier id (e.g. A23B, A24F, ...,H01G), same as cpc_group_id in api/query of PatentViews
-    cpc_level4                (json)  : cpc 4-tier id (e.g. F04D29/38, A24F11/00), same as cpc_subgroup_id in api/query of PatentViews
+    *cpc_level1                (json)  : cpc 1-tier id (e.g. A, B, ...,H), same as cpc_section_id in api/query of PatentViews
+    *cpc_level2                (json)  : cpc 2-tier id (e.g. A01, B01, ...,H99)
+    *cpc_level3                (json)  : cpc 3-tier id (e.g. A23B, A24F, ...,H01G), same as cpc_group_id in api/query of PatentViews
+    *cpc_level4                (json)  : cpc 4-tier id (e.g. F04D29/38, A24F11/00), same as cpc_subgroup_id in api/query of PatentViews
     
  There are optional elements you can have returned, see examples below:
  

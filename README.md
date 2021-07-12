@@ -20,7 +20,9 @@ The following elements are always returned by the scraper class:
     *cpc_level1                (json)  : cpc 1-tier id (e.g. A, B, ...,H), same as cpc_section_id in api/query of PatentViews
     *cpc_level2                (json)  : cpc 2-tier id (e.g. A01, B01, ...,H99)
     *cpc_level3                (json)  : cpc 3-tier id (e.g. A23B, A24F, ...,H01G), same as cpc_group_id in api/query of PatentViews
-    *cpc_level4                (json)  : cpc 4-tier id (e.g. F04D29/38, A24F11/00), same as cpc_subgroup_id in api/query of PatentViews
+    *cpc_level4                (json)  : cpc 4-tier id (e.g. F04D29, A24F11)
+    *cpc_level5                (json)  : cpc 5-tier id (e.g. F04D29/38, A24F11/00), same as cpc_subgroup_id in api/query of PatentViews
+    
     
  There are optional elements you can have returned, see examples below:
  

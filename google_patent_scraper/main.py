@@ -171,6 +171,11 @@ class scraper_class:
             - forward_cites_yes_family  (json)  : forward citations that are family-to-family cites
             - backward_cites_no_family  (json)  : backward citations that are not family-to-family cites
             - backward_cites_yes_family (json)  : backward citations that are family-to-family cites
+            - cpc_level1                (json)  : cpc 1-tier id (e.g. A, B, ...,H), same as cpc_section_id in api/query of PatentViews
+            - cpc_level2                (json)  : cpc 2-tier id (e.g. A01, B01, ...,H99)
+            - cpc_level3                (json)  : cpc 3-tier id (e.g. A23B, A24F, ...,H01G), same as cpc_group_id in api/query of PatentViews
+            - cpc_level4                (json)  : cpc 4-tier id (e.g. F04D29, A24F11)
+            - cpc_level5                (json)  : cpc 5-tier id (e.g. F04D29/38, A24F11/00), same as cpc_subgroup_id in api/query of PatentViews
 
         Inputs:
             - soup (str) : html string from of google patent html
@@ -277,6 +282,7 @@ class scraper_class:
         cpc_level2=[]
         cpc_level3=[]
         cpc_level4=[]
+        cpc_level5=[]
         cpc_data = soup.find_all('span', itemprop="Code")
         # Get text 
         if cpc_data:
@@ -288,8 +294,19 @@ class scraper_class:
                    cpc_level2.append(cpc_code)
                elif len(cpc_code) == 4 and cpc_code not in cpc_level3:
                    cpc_level3.append(cpc_code)
-               elif len(cpc_code) > 4 and cpc_code not in cpc_level4:
-                   cpc_level4.append(cpc_code)
+               elif len(cpc_code) > 4:
+                   if '/' in cpc_code:
+                       cpc_l4_code = cpc_code[:cpc_code.index('/')]
+                       if cpc_code not in cpc_level5:
+                           cpc_level5.append(cpc_code)
+                       else:
+                           pass
+                   else:
+                       cpc_l4_code = cpc_code
+                   if cpc_l4_code not in cpc_level4:
+                       cpc_level4.append(cpc_l4_code)
+                   else:
+                       pass
                else:
                    pass
 
@@ -311,7 +328,8 @@ class scraper_class:
                 'cpc_level1':json.dumps(cpc_level1),
                 'cpc_level2':json.dumps(cpc_level2),
                 'cpc_level3':json.dumps(cpc_level3),
-                'cpc_level4':json.dumps(cpc_level4)})
+                'cpc_level4':json.dumps(cpc_level4),
+                'cpc_level5':json.dumps(cpc_level5)})
 
     def get_scraped_data(self,soup,patent,url):
         # ~~ Parse individual patent ~~ #
